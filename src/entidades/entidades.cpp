@@ -1,172 +1,139 @@
-#include <iostream>
-#include <stdexcept>
-#include <string>
-using namespace std;
+#include "entidades.hpp"
+#include <utility>
 
-// Classe Pessoa
-class Pessoa {
-private:
-    string nome;
-    string email;
+// -------------------- Pessoa --------------------
+Pessoa::Pessoa(const string& nomeValor, const string& emailValor) {
+    setNome(nomeValor);
+    setEmail(emailValor);
+}
 
-public:
-    Pessoa(const string& nome, const string& email) {
-        if (nome.empty()) throw invalid_argument("Nome nao pode ser vazio.");
-        if (email.find('@') == string::npos) throw invalid_argument("Email invalido.");
-        this->nome = nome;
-        this->email = email;
-    }
+string Pessoa::getNome() const {
+    return nome.getValor();
+}
 
-    string getNome() const { return nome; }
-    string getEmail() const { return email; }
+void Pessoa::setNome(const string& valor) {
+    nome.setValor(valor);
+}
 
-    void setNome(const string& nome) {
-        if (nome.empty()) throw invalid_argument("Nome nao pode ser vazio.");
-        this->nome = nome;
-    }
+string Pessoa::getEmail() const {
+    return email.getValor();
+}
 
-    void setEmail(const string& email) {
-        if (email.find('@') == string::npos) throw invalid_argument("Email invalido.");
-        this->email = email;
-    }
-};
+void Pessoa::setEmail(const string& valor) {
+    email.setValor(valor);
+}
 
-// Classe Hospede
-class Hospede : public Pessoa {
-private:
-    string endereco;
-    string cartao;
+// -------------------- Gerente --------------------
+Gerente::Gerente(const string& nomeValor, const string& emailValor, const string& matriculaValor)
+    : Pessoa(nomeValor, emailValor) {
+    setMatricula(matriculaValor);
+}
 
-public:
-    Hospede(const string& nome, const string& email, const string& cartao)
-        : Pessoa(nome, email) {
-        setCartao(cartao);
-    }
+string Gerente::getMatricula() const {
+    return matricula.getValor();
+}
 
-    string getEndereco() const { return endereco; }
-    string getCartao() const { return cartao; }
+void Gerente::setMatricula(const string& valor) {
+    matricula.setValor(valor);
+}
 
-    void setEndereco(const string& endereco) {
-        if (endereco.empty()) throw invalid_argument("Endereco nao pode ser vazio.");
-        this->endereco = endereco;
-    }
+// -------------------- Hospede --------------------
+Hospede::Hospede(const string& nomeValor, const string& emailValor, const string& cartaoValor)
+    : Pessoa(nomeValor, emailValor) {
+    setCartaoCredito(cartaoValor);
+}
 
-    void setCartao(const string& cartao) {
-        if (cartao.size() != 16) throw invalid_argument("Cartao deve ter 16 digitos.");
-        this->cartao = cartao;
-    }
-};
+string Hospede::getCartaoCredito() const {
+    return cartaoCredito.getValor();
+}
 
-// Classe Hotel
-class Hotel {
-private:
-    string nome;
-    string cidade;
+void Hospede::setCartaoCredito(const string& valor) {
+    cartaoCredito.setValor(valor);
+}
 
-public:
-    Hotel(const string& nome, const string& cidade) {
-        setNome(nome);
-        setCidade(cidade);
-    }
+// -------------------- Quarto --------------------
+Quarto::Quarto(int numeroValor, int capacidadeValor, int precoCentavos) {
+    setNumero(numeroValor);
+    setCapacidade(capacidadeValor);
+    setPrecoDiaria(precoCentavos);
+}
 
-    string getNome() const { return nome; }
-    string getCidade() const { return cidade; }
+int Quarto::getNumero() const {
+    return numero.getValor();
+}
 
-    void setNome(const string& nome) {
-        if (nome.empty()) throw invalid_argument("Nome do hotel nao pode ser vazio.");
-        this->nome = nome;
-    }
+void Quarto::setNumero(int valor) {
+    numero.setValor(valor);
+}
 
-    void setCidade(const string& cidade) {
-        if (cidade.empty()) throw invalid_argument("Cidade nao pode ser vazia.");
-        this->cidade = cidade;
-    }
-};
+int Quarto::getCapacidade() const {
+    return capacidade.getValor();
+}
 
-// Classe Quarto
-class Quarto {
-private:
-    int numero;
-    int capacidade;
-    double diaria;
+void Quarto::setCapacidade(int valor) {
+    capacidade.setValor(valor);
+}
 
-public:
-    Quarto(int numero, int capacidade, double diaria) {
-        setNumero(numero);
-        setCapacidade(capacidade);
-        setDiaria(diaria);
-    }
+int Quarto::getPrecoDiariaCentavos() const {
+    return precoDiaria.getValor();
+}
 
-    int getNumero() const { return numero; }
-    int getCapacidade() const { return capacidade; }
-    double getDiaria() const { return diaria; }
+double Quarto::getPrecoDiariaReais() const {
+    return static_cast<double>(precoDiaria.getValor()) / 100.0;
+}
 
-    void setNumero(int numero) {
-        if (numero <= 0) throw invalid_argument("Numero de quarto invalido.");
-        this->numero = numero;
-    }
+void Quarto::setPrecoDiaria(int centavos) {
+    precoDiaria.setValor(centavos);
+}
 
-    void setCapacidade(int capacidade) {
-        if (capacidade < 1 || capacidade > 4)
-            throw invalid_argument("Capacidade deve ser entre 1 e 4.");
-        this->capacidade = capacidade;
-    }
+// -------------------- Hotel --------------------
+Hotel::Hotel(const string& nomeValor, const string& cidadeValor) {
+    setNome(nomeValor);
+    setCidade(cidadeValor);
+}
 
-    void setDiaria(double diaria) {
-        if (diaria <= 0) throw invalid_argument("Valor da diaria invalido.");
-        this->diaria = diaria;
-    }
-};
+string Hotel::getNome() const {
+    return nome.getValor();
+}
 
-// Classe Reserva
-class Reserva {
-private:
-    Hospede hospede;
-    Quarto quarto;
-    int dias;
+void Hotel::setNome(const string& valor) {
+    nome.setValor(valor);
+}
 
-public:
-    Reserva(const Hospede& hospede, const Quarto& quarto, int dias)
-        : hospede(hospede), quarto(quarto) {
-        setDias(dias);
-    }
+string Hotel::getCidade() const {
+    return cidade.getValor();
+}
 
-    Hospede getHospede() const { return hospede; }
-    Quarto getQuarto() const { return quarto; }
-    int getDias() const { return dias; }
+void Hotel::setCidade(const string& valor) {
+    cidade.setValor(valor);
+}
 
-    void setDias(int dias) {
-        if (dias <= 0) throw invalid_argument("Quantidade de dias invalida.");
-        this->dias = dias;
-    }
+// -------------------- Reserva --------------------
+Reserva::Reserva(const Hospede& h, const Quarto& q, int diasValor)
+    : hospede(h), quarto(q) {
+    setDias(diasValor);
+}
 
-    double calcularTotal() const {
-        return dias * quarto.getDiaria();
-    }
-};
+Hospede Reserva::getHospede() const {
+    return hospede;
+}
 
-// Função principal
-int main() {
-    try {
-        Hospede hospede("Cassio", "cassio@email.com", "1234567890123456");
-        hospede.setEndereco("Rua das Flores, 123");
+Quarto Reserva::getQuarto() const {
+    return quarto;
+}
 
-        Hotel hotel("Hotel Bom Sono", "Brasilia");
+int Reserva::getDias() const {
+    return dias.getValor();
+}
 
-        Quarto quarto(101, 2, 150.0);
+void Reserva::setDias(int valor) {
+    dias.setValor(valor);
+}
 
-        Reserva reserva(hospede, quarto, 3);
+long Reserva::calcularTotalCentavos() const {
+    return static_cast<long>(getDias()) * quarto.getPrecoDiariaCentavos();
+}
 
-        cout << "Hospede: " << hospede.getNome() << endl;
-        cout << "Hotel: " << hotel.getNome() << " - " << hotel.getCidade() << endl;
-        cout << "Quarto: " << quarto.getNumero() << " (Capacidade: "
-             << quarto.getCapacidade() << ")" << endl;
-        cout << "Dias: " << reserva.getDias() << endl;
-        cout << "Total: R$ " << reserva.calcularTotal() << endl;
-
-    } catch (const exception& e) {
-        cerr << "Erro: " << e.what() << endl;
-    }
-
-    return 0;
+double Reserva::calcularTotalReais() const {
+    return static_cast<double>(calcularTotalCentavos()) / 100.0;
 }
