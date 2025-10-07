@@ -1,6 +1,0 @@
-# depslib dependency file v1.0
-1759182187 source:/home/cassio/Documentos/projeto-tp1/src/main.cpp
-	<iostream>
-	<stdexcept>
-	<string>
-

@@ -16,12 +16,14 @@ using namespace std;
 /**
  * @class Nome
  * @brief Domínio que representa um nome próprio entre 5 e 20 caracteres,
- *        com capitalização correta e sem espaços duplicados ou nas extremidades.
+ *        com capitalização correta e sem espaços duplicados ou nas
+ * extremidades.
  */
 class Nome {
 private:
   string valor;
   void validar(const string &valor) const;
+
 public:
   /** Define o valor validando-o. */
   void setValor(const string &valor);
@@ -37,6 +39,7 @@ class Capacidade {
 private:
   int valor;
   void validar(int valor) const;
+
 public:
   /** Define capacidade (1..4). */
   void setValor(int valor);
@@ -46,12 +49,14 @@ public:
 
 /**
  * @class Cartao
- * @brief Domínio que representa número de cartão com 16 dígitos validado por Luhn.
+ * @brief Domínio que representa número de cartão com 16 dígitos validado por
+ * Luhn.
  */
 class Cartao {
 private:
   string valor;
   void validar(const string &valor) const;
+
 public:
   /** Define número do cartão (16 dígitos + Luhn). */
   void setValor(const string &valor);
@@ -67,6 +72,7 @@ class Codigo {
 private:
   string valor;
   void validar(const string &valor) const;
+
 public:
   /** Define código (10 chars alfanuméricos minúsculos). */
   void setValor(const string &valor);
@@ -76,12 +82,14 @@ public:
 
 /**
  * @class Data
- * @brief Domínio de data no formato D[DD]-MMM-YYYY com meses PT-BR e ano 2000-2999.
+ * @brief Domínio de data no formato D[DD]-MMM-YYYY com meses PT-BR e ano
+ * 2000-2999.
  */
 class Data {
 private:
   string valor;
   void validar(const string &valor) const;
+
 public:
   /** Define a data validando formato e consistência (inclui bissexto). */
   void setValor(const string &valor);
@@ -97,6 +105,7 @@ class Dinheiro {
 private:
   int valor;
   void validar(int valor) const;
+
 public:
   /** Define o valor em centavos. */
   void setValor(int valor);
@@ -106,12 +115,14 @@ public:
 
 /**
  * @class Email
- * @brief Domínio que valida parte local e domínio conforme regras especificadas.
+ * @brief Domínio que valida parte local e domínio conforme regras
+ * especificadas.
  */
 class Email {
 private:
   string valor;
   void validar(const string &valor) const;
+
 public:
   /** Define email validando formato parte-local@dominio. */
   void setValor(const string &valor);
@@ -121,12 +132,14 @@ public:
 
 /**
  * @class Endereco
- * @brief Domínio que valida endereço textual (5-30 chars) com regras de pontuação.
+ * @brief Domínio que valida endereço textual (5-30 chars) com regras de
+ * pontuação.
  */
 class Endereco {
 private:
   string valor;
   void validar(const string &valor) const;
+
 public:
   /** Define o endereço. */
   void setValor(const string &valor);
@@ -142,6 +155,7 @@ class Numero {
 private:
   int valor;
   void validar(int valor) const;
+
 public:
   /** Define número (1..999). */
   void setValor(int valor);
@@ -157,6 +171,7 @@ class Ramal {
 private:
   int valor;
   void validar(int valor) const;
+
 public:
   /** Define ramal (0..50). */
   void setValor(int valor);
@@ -166,12 +181,14 @@ public:
 
 /**
  * @class Senha
- * @brief Domínio de senha de 5 caracteres com restrições de sequência e composição.
+ * @brief Domínio de senha de 5 caracteres com restrições de sequência e
+ * composição.
  */
 class Senha {
 private:
   string valor;
   void validar(const string &valor) const;
+
 public:
   /** Define a senha validando regras de composição. */
   void setValor(const string &valor);
@@ -187,6 +204,7 @@ class Telefone {
 private:
   string valor;
   void validar(const string &valor) const;
+
 public:
   /** Define telefone validando formato. */
   void setValor(const string &valor);
