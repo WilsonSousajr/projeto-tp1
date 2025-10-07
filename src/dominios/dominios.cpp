@@ -1,3 +1,11 @@
+/**
+ * @file dominios.cpp
+ * @brief Implementations of domain validation classes.
+ *
+ * Implementa a lógica de validação definida nas classes de domínio
+ * declaradas em dominios.hpp.
+ */
+
 #include "dominios.hpp"
 #include <algorithm>
 #include <cctype>

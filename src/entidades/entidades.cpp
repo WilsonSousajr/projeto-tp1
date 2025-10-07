@@ -1,3 +1,11 @@
+/**
+ * @file entidades.cpp
+ * @brief Implementations of entity classes that aggregate validated domains.
+ *
+ * Fornece a lógica de construção e acesso aos atributos encapsulados pelos
+ * domínios declarados em dominios.hpp, garantindo validação centralizada.
+ */
+
 #include "entidades.hpp"
 #include <utility>
 
