@@ -6,7 +6,6 @@
 #include "apresentacao.hpp"
 #include <iostream>
 #include <stdexcept>
-#include "../servicos/servicos.hpp"
 
 using namespace std;
 
@@ -19,6 +18,18 @@ void CntrApresentacaoControle::setCntrServicoAutenticacao(
 
 void CntrApresentacaoControle::setCntrServicoGerente(IServicoGerente *cntr) {
   this->cntrServicoGerente = cntr;
+}
+void CntrApresentacaoControle::setCntrServicoHospede(IServicoHospede *cntr) {
+  this->cntrServicoHospede = cntr;
+}
+void CntrApresentacaoControle::setCntrServicoHotel(IServicoHotel *cntr) {
+  this->cntrServicoHotel = cntr;
+}
+void CntrApresentacaoControle::setCntrServicoQuarto(IServicoQuarto *cntr) {
+  this->cntrServicoQuarto = cntr;
+}
+void CntrApresentacaoControle::setCntrServicoReserva(IServicoReserva *cntr) {
+  this->cntrServicoReserva = cntr;
 }
 
 void CntrApresentacaoControle::executar() {
@@ -63,7 +74,10 @@ void CntrApresentacaoControle::executar() {
         if (cntrServicoAutenticacao->autenticar(email, senha)) {
           cout << "Login bem-sucedido!" << endl;
           CntrApresentacaoPessoal cntrPessoal;
-          // Injetar dependências (não mostrado para simplicidade)
+          cntrPessoal.setCntrServicoHospede(this->cntrServicoHospede);
+          cntrPessoal.setCntrServicoHotel(this->cntrServicoHotel);
+          cntrPessoal.setCntrServicoQuarto(this->cntrServicoQuarto);
+          cntrPessoal.setCntrServicoReserva(this->cntrServicoReserva);
           cntrPessoal.executar();
         } else {
           cout << "Falha na autenticação. Verifique email e senha." << endl;
@@ -140,17 +154,6 @@ void CntrApresentacaoPessoal::setCntrServicoReserva(IServicoReserva *cntr) {
 }
 
 void CntrApresentacaoPessoal::executar() {
-  // Instanciando as controladoras de serviço concretas
-  CntrServicoHospede servicoHospede;
-  CntrServicoHotel servicoHotel;
-  CntrServicoQuarto servicoQuarto;
-  CntrServicoReserva servicoReserva;
-
-  // Injetando as dependências
-  setCntrServicoHospede(&servicoHospede);
-  setCntrServicoHotel(&servicoHotel);
-  setCntrServicoQuarto(&servicoQuarto);
-  setCntrServicoReserva(&servicoReserva);
 
   while (true) {
     cout << "\n--- Menu Principal ---" << endl;

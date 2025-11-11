@@ -5,6 +5,67 @@
 
 #include "servicos.hpp"
 #include <stdexcept>
+#include <map>
+#include <cctype>
+
+namespace {
+// Converte abreviação de mês (ex.: JAN) para número (1-12)
+int monthFromAbbr(const string &m) {
+  static const map<string, int> mm{
+      {"JAN", 1}, {"FEB", 2}, {"MAR", 3}, {"APR", 4}, {"MAY", 5}, {"JUN", 6},
+      {"JUL", 7}, {"AUG", 8}, {"SEP", 9}, {"OCT", 10}, {"NOV", 11}, {"DEC", 12}};
+  string u = m;
+  for (char &c : u) {
+    c = static_cast<char>(toupper(static_cast<unsigned char>(c)));
+  }
+  auto it = mm.find(u);
+  if (it == mm.end()) {
+    throw invalid_argument("Mês inválido.");
+  }
+  return it->second;
+}
+
+// Faz parsing de data no formato D/DD-MMM-YYYY
+bool parseDateDMY(const string &s, int &d, int &m, int &y) {
+  size_t p1 = s.find('-');
+  size_t p2 = s.find('-', (p1 == string::npos) ? 0 : p1 + 1);
+  if (p1 == string::npos || p2 == string::npos) {
+    return false;
+  }
+  d = stoi(s.substr(0, p1));
+  m = monthFromAbbr(s.substr(p1 + 1, p2 - p1 - 1));
+  y = stoi(s.substr(p2 + 1));
+  return true;
+}
+
+// Número de dias serial para comparação de intervalos
+long dayNumber(int d, int m, int y) {
+  if (m < 3) {
+    y--;
+    m += 12;
+  }
+  return 365L * y + y / 4 - y / 100 + y / 400 + (153 * (m - 3) + 2) / 5 + d - 1;
+}
+
+struct Range {
+  long a;
+  long b;
+};
+
+Range makeRange(const string &start, int dias) {
+  int d, m, y;
+  if (!parseDateDMY(start, d, m, y)) {
+    throw invalid_argument("Data inválida.");
+  }
+  long s = dayNumber(d, m, y);
+  long e = s + ((dias <= 0) ? 0 : (dias - 1));
+  return {s, e};
+}
+
+bool overlaps(const Range &r1, const Range &r2) {
+  return !(r1.b < r2.a || r2.b < r1.a);
+}
+} // namespace
 
 // Instâncias globais dos contêineres para simular a persistência
 static ContainerGerente containerGerente;
@@ -296,10 +357,10 @@ bool CntrServicoReserva::cadastrar(const Reserva &reserva) {
   list<Reserva> todasReservas = containerReserva.listarTodos();
   for (const auto &existente : todasReservas) {
     if (existente.getQuarto().getNumero() == reserva.getQuarto().getNumero()) {
-      // Lógica de sobreposição de datas seria implementada aqui.
-      // Por simplicidade, vamos apenas verificar se a data de início é a mesma.
-      if (existente.getDataInicio() == reserva.getDataInicio()) {
-        throw invalid_argument("Conflito de reserva para este quarto e data.");
+      auto r1 = makeRange(existente.getDataInicio(), existente.getDias());
+      auto r2 = makeRange(reserva.getDataInicio(), reserva.getDias());
+      if (overlaps(r1, r2)) {
+        throw invalid_argument("Conflito de reserva para este quarto no intervalo de datas.");
       }
     }
   }
@@ -310,6 +371,20 @@ Reserva CntrServicoReserva::consultar(const Codigo &codigo) {
   return containerReserva.pesquisar(codigo.getValor());
 }
 bool CntrServicoReserva::editar(const Reserva &reserva) {
+  {
+    list<Reserva> todas = containerReserva.listarTodos();
+    for (const auto &ex : todas) {
+      if (ex.getCodigo() == reserva.getCodigo())
+        continue;
+      if (ex.getQuarto().getNumero() == reserva.getQuarto().getNumero()) {
+        auto r1 = makeRange(ex.getDataInicio(), ex.getDias());
+        auto r2 = makeRange(reserva.getDataInicio(), reserva.getDias());
+        if (overlaps(r1, r2)) {
+          throw invalid_argument("Conflito de reserva para este quarto no intervalo de datas.");
+        }
+      }
+    }
+  }
   containerReserva.atualizar(reserva);
   return true;
 }

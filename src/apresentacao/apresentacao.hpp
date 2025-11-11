@@ -21,11 +21,19 @@ class CntrApresentacaoControle {
 private:
   IServicoAutenticacao *cntrServicoAutenticacao;
   IServicoGerente *cntrServicoGerente;
+  IServicoHospede *cntrServicoHospede;
+  IServicoHotel *cntrServicoHotel;
+  IServicoQuarto *cntrServicoQuarto;
+  IServicoReserva *cntrServicoReserva;
 
 public:
   void executar();
   void setCntrServicoAutenticacao(IServicoAutenticacao *cntr);
   void setCntrServicoGerente(IServicoGerente *cntr);
+  void setCntrServicoHospede(IServicoHospede *cntr);
+  void setCntrServicoHotel(IServicoHotel *cntr);
+  void setCntrServicoQuarto(IServicoQuarto *cntr);
+  void setCntrServicoReserva(IServicoReserva *cntr);
 };
 
 /**
