@@ -40,9 +40,9 @@ void CntrApresentacaoControle::executar() {
   // Cadastrar um gerente padrão para permitir o primeiro login
   try {
     Gerente gerentePadrao("Admin Primeiro", "admin@hotel.com", "12345abcde",
-                          "Aa1!b");
+                          "A1a!2");
     cntrServicoGerente->cadastrar(gerentePadrao);
-    cout << "INFO: Gerente padrão 'admin@hotel.com' com senha 'Aa1!b' criado."
+    cout << "INFO: Gerente padrão 'admin@hotel.com' com senha 'A1a!2' criado."
          << endl;
   } catch (const invalid_argument &e) {
     // Ignora se o gerente já existe em execuções anteriores.
