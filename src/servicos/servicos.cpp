@@ -12,8 +12,12 @@ namespace {
 // Converte abreviação de mês (ex.: JAN) para número (1-12)
 int monthFromAbbr(const string &m) {
   static const map<string, int> mm{
-      {"JAN", 1}, {"FEB", 2}, {"MAR", 3}, {"APR", 4}, {"MAY", 5}, {"JUN", 6},
-      {"JUL", 7}, {"AUG", 8}, {"SEP", 9}, {"OCT", 10}, {"NOV", 11}, {"DEC", 12}};
+      // Português
+      {"JAN", 1}, {"FEV", 2}, {"MAR", 3}, {"ABR", 4}, {"MAI", 5}, {"JUN", 6},
+      {"JUL", 7}, {"AGO", 8}, {"SET", 9}, {"OUT", 10}, {"NOV", 11}, {"DEZ", 12},
+      // Inglês (aceito também)
+      {"FEB", 2}, {"APR", 4}, {"MAY", 5}, {"AUG", 8}, {"SEP", 9}, {"OCT", 10}, {"DEC", 12}
+  };
   string u = m;
   for (char &c : u) {
     c = static_cast<char>(toupper(static_cast<unsigned char>(c)));

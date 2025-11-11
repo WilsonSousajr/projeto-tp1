@@ -340,7 +340,7 @@ void CntrApresentacaoPessoal::menuReservas() {
       int numQuarto, dias;
       cout << "Código da Reserva: ";
       cin >> codigo;
-      cout << "Data de Início (DD-MMM-YYYY): ";
+      cout << "Data de Início (DD-MES-YYYY, ex.: 10-MAI-2025): ";
       cin >> dataInicio;
       cout << "Dias: ";
       cin >> dias;
