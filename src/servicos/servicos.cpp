@@ -20,7 +20,7 @@ void ContainerGerente::inserir(const Gerente &gerente) {
   if (existe(gerente.getEmail())) {
     throw invalid_argument("Gerente já cadastrado.");
   }
-  gerentes[gerente.getEmail()] = gerente;
+  gerentes.emplace(gerente.getEmail(), gerente);
 }
 
 void ContainerGerente::remover(const string &email) {
@@ -53,7 +53,7 @@ void ContainerHospede::inserir(const Hospede &hospede) {
   if (hospedes.count(hospede.getEmail())) {
     throw invalid_argument("Hóspede já cadastrado.");
   }
-  hospedes[hospede.getEmail()] = hospede;
+  hospedes.emplace(hospede.getEmail(), hospede);
 }
 void ContainerHospede::remover(const string &email) {
   if (!hospedes.count(email)) {
@@ -86,7 +86,7 @@ void ContainerHotel::inserir(const Hotel &hotel) {
   if (hoteis.count(hotel.getNome())) {
     throw invalid_argument("Hotel já cadastrado.");
   }
-  hoteis[hotel.getNome()] = hotel;
+  hoteis.emplace(hotel.getNome(), hotel);
 }
 void ContainerHotel::remover(const string &nome) {
   if (!hoteis.count(nome)) {
@@ -119,7 +119,7 @@ void ContainerQuarto::inserir(const Quarto &quarto) {
   if (quartos.count(quarto.getNumero())) {
     throw invalid_argument("Quarto já cadastrado.");
   }
-  quartos[quarto.getNumero()] = quarto;
+  quartos.emplace(quarto.getNumero(), quarto);
 }
 void ContainerQuarto::remover(int numero) {
   if (!quartos.count(numero)) {
@@ -152,7 +152,7 @@ void ContainerReserva::inserir(const Reserva &reserva) {
   if (reservas.count(reserva.getCodigo())) {
     throw invalid_argument("Reserva já cadastrada.");
   }
-  reservas[reserva.getCodigo()] = reserva;
+  reservas.emplace(reserva.getCodigo(), reserva);
 }
 void ContainerReserva::remover(const string &codigo) {
   if (!reservas.count(codigo)) {
