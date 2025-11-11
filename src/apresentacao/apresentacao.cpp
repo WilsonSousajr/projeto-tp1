@@ -6,6 +6,7 @@
 #include "apresentacao.hpp"
 #include <iostream>
 #include <stdexcept>
+#include <limits>
 
 using namespace std;
 
@@ -39,10 +40,9 @@ void CntrApresentacaoControle::executar() {
   // Cadastrar um gerente padrão para permitir o primeiro login
   try {
     Gerente gerentePadrao("Admin Primeiro", "admin@hotel.com", "12345abcde",
-                          "Admin1!");
+                          "Aa1!b");
     cntrServicoGerente->cadastrar(gerentePadrao);
-    cout << "INFO: Gerente padrão 'admin@hotel.com' com senha 'Admin1!' "
-            "criado."
+    cout << "INFO: Gerente padrão 'admin@hotel.com' com senha 'Aa1!b' criado."
          << endl;
   } catch (const invalid_argument &e) {
     // Ignora se o gerente já existe em execuções anteriores.
@@ -56,6 +56,12 @@ void CntrApresentacaoControle::executar() {
 
     int opcao;
     cin >> opcao;
+    if (!cin) {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Opção inválida." << endl;
+      continue;
+    }
 
     switch (opcao) {
     case 1: {
@@ -63,7 +69,7 @@ void CntrApresentacaoControle::executar() {
         string emailInput, senhaInput;
         cout << "Email: ";
         cin >> emailInput;
-        cout << "Senha: ";
+        cout << "Senha (5 chars): ";
         cin >> senhaInput;
 
         Email email;
@@ -113,7 +119,7 @@ void CntrApresentacaoGerente::cadastrar() {
   try {
     string nome, email, matricula, senha;
     cout << "Nome: ";
-    cin.ignore();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin, nome);
     cout << "Email: ";
     cin >> email;
@@ -166,6 +172,12 @@ void CntrApresentacaoPessoal::executar() {
 
     int opcao;
     cin >> opcao;
+    if (!cin) {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Opção inválida." << endl;
+      continue;
+    }
 
     switch (opcao) {
     case 1:
@@ -196,11 +208,17 @@ void CntrApresentacaoPessoal::menuHospedes() {
   cout << "Opção: ";
   int opcao;
   cin >> opcao;
+  if (!cin) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Opção inválida." << endl;
+    return;
+  }
   if (opcao == 1) {
     try {
       string nome, email, cartao;
       cout << "Nome: ";
-      cin.ignore();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
       getline(cin, nome);
       cout << "Email: ";
       cin >> email;
@@ -229,12 +247,18 @@ void CntrApresentacaoPessoal::menuHoteis() {
   cout << "Opção: ";
   int opcao;
   cin >> opcao;
+  if (!cin) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Opção inválida." << endl;
+    return;
+  }
   if (opcao == 1) {
     try {
       string nome, cidade;
       int vagas;
       cout << "Nome do Hotel: ";
-      cin.ignore();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
       getline(cin, nome);
       cout << "Cidade: ";
       getline(cin, cidade);
@@ -264,6 +288,12 @@ void CntrApresentacaoPessoal::menuQuartos() {
   cout << "Opção: ";
   int opcao;
   cin >> opcao;
+  if (!cin) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Opção inválida." << endl;
+    return;
+  }
   if (opcao == 1) {
     try {
       int numero, capacidade, preco;
@@ -298,6 +328,12 @@ void CntrApresentacaoPessoal::menuReservas() {
   cout << "Opção: ";
   int opcao;
   cin >> opcao;
+  if (!cin) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Opção inválida." << endl;
+    return;
+  }
   if (opcao == 1) {
     try {
       string codigo, dataInicio, emailHospede;
