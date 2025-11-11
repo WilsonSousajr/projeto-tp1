@@ -257,10 +257,10 @@ void CntrApresentacaoPessoal::menuHoteis() {
     try {
       string nome, cidade;
       int vagas;
-      cout << "Nome do Hotel: ";
+      cout << "Nome do Hotel (5-20 chars, palavras com inicial maiúscula): ";
       cin.ignore(numeric_limits<streamsize>::max(), '\n');
       getline(cin, nome);
-      cout << "Cidade: ";
+      cout << "Cidade (>=5 chars, palavras com inicial maiúscula): ";
       getline(cin, cidade);
       cout << "Vagas: ";
       cin >> vagas;
