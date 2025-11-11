@@ -118,6 +118,7 @@ void CntrApresentacaoGerente::cadastrar() {
 }
 
 void CntrApresentacaoGerente::executar(const Email &email) {
+  (void)email;
   // Implementar menu para editar/descadastrar a própria conta
   cout << "\nFuncionalidades de gerenciamento de conta não implementadas."
        << endl;

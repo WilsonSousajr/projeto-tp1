@@ -41,7 +41,7 @@ void ContainerGerente::atualizar(const Gerente &gerente) {
   if (!existe(gerente.getEmail())) {
     throw invalid_argument("Gerente não encontrado.");
   }
-  gerentes[gerente.getEmail()] = gerente;
+  gerentes.at(gerente.getEmail()) = gerente;
 }
 
 bool ContainerGerente::existe(const string &email) {
@@ -71,7 +71,7 @@ void ContainerHospede::atualizar(const Hospede &hospede) {
   if (!hospedes.count(hospede.getEmail())) {
     throw invalid_argument("Hóspede não encontrado.");
   }
-  hospedes[hospede.getEmail()] = hospede;
+  hospedes.at(hospede.getEmail()) = hospede;
 }
 list<Hospede> ContainerHospede::listarTodos() {
   list<Hospede> lista;
@@ -104,7 +104,7 @@ void ContainerHotel::atualizar(const Hotel &hotel) {
   if (!hoteis.count(hotel.getNome())) {
     throw invalid_argument("Hotel não encontrado.");
   }
-  hoteis[hotel.getNome()] = hotel;
+  hoteis.at(hotel.getNome()) = hotel;
 }
 list<Hotel> ContainerHotel::listarTodos() {
   list<Hotel> lista;
@@ -137,7 +137,7 @@ void ContainerQuarto::atualizar(const Quarto &quarto) {
   if (!quartos.count(quarto.getNumero())) {
     throw invalid_argument("Quarto não encontrado.");
   }
-  quartos[quarto.getNumero()] = quarto;
+  quartos.at(quarto.getNumero()) = quarto;
 }
 list<Quarto> ContainerQuarto::listarTodos() {
   list<Quarto> lista;
@@ -170,7 +170,7 @@ void ContainerReserva::atualizar(const Reserva &reserva) {
   if (!reservas.count(reserva.getCodigo())) {
     throw invalid_argument("Reserva não encontrada.");
   }
-  reservas[reserva.getCodigo()] = reserva;
+  reservas.at(reserva.getCodigo()) = reserva;
 }
 list<Reserva> ContainerReserva::listarTodos() {
   list<Reserva> lista;
