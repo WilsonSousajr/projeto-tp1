@@ -205,6 +205,14 @@ void CntrApresentacaoPessoal::menuHospedes() {
   cout << "Funcionalidade de Hóspedes:" << endl;
   cout << "1. Cadastrar" << endl;
   cout << "2. Listar" << endl;
+  cout << "3. Editar" << endl;
+  cout << "4. Excluir" << endl;
+  cout << "3. Editar" << endl;
+  cout << "4. Excluir" << endl;
+  cout << "3. Editar" << endl;
+  cout << "4. Excluir" << endl;
+  cout << "3. Editar" << endl;
+  cout << "4. Excluir" << endl;
   cout << "Opção: ";
   int opcao;
   cin >> opcao;
@@ -236,6 +244,36 @@ void CntrApresentacaoPessoal::menuHospedes() {
     cout << "\n--- Lista de Hóspedes ---" << endl;
     for (const auto &h : lista) {
       cout << "Nome: " << h.getNome() << " | Email: " << h.getEmail() << endl;
+    }
+  } else if (opcao == 3) {
+    try {
+      string email, nome, cartao;
+      cout << "Email do Hóspede a editar: ";
+      cin >> email;
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Novo Nome: ";
+      getline(cin, nome);
+      cout << "Novo Cartão de Crédito: ";
+      cin >> cartao;
+      Hospede hospede(nome, email, cartao); // PK = email permanece igual
+      if (cntrServicoHospede->editar(hospede)) {
+        cout << "Hóspede atualizado com sucesso!" << endl;
+      }
+    } catch (const invalid_argument &e) {
+      cout << "Erro: " << e.what() << endl;
+    }
+  } else if (opcao == 4) {
+    try {
+      string email;
+      cout << "Email do Hóspede a excluir: ";
+      cin >> email;
+      Email dom;
+      dom.setValor(email);
+      if (cntrServicoHospede->descadastrar(dom)) {
+        cout << "Hóspede excluído com sucesso!" << endl;
+      }
+    } catch (const invalid_argument &e) {
+      cout << "Erro: " << e.what() << endl;
     }
   }
 }
@@ -278,6 +316,38 @@ void CntrApresentacaoPessoal::menuHoteis() {
       cout << "Nome: " << h.getNome() << " | Cidade: " << h.getCidade()
            << " | Vagas: " << h.getVagas() << endl;
     }
+  } else if (opcao == 3) {
+    try {
+      string nome, cidade;
+      int vagas;
+      cout << "Nome do Hotel a editar: ";
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      getline(cin, nome);
+      cout << "Nova Cidade: ";
+      getline(cin, cidade);
+      cout << "Novas Vagas: ";
+      cin >> vagas;
+      Hotel hotel(nome, cidade, vagas); // PK = nome permanece igual
+      if (cntrServicoHotel->editar(hotel)) {
+        cout << "Hotel atualizado com sucesso!" << endl;
+      }
+    } catch (const invalid_argument &e) {
+      cout << "Erro: " << e.what() << endl;
+    }
+  } else if (opcao == 4) {
+    try {
+      string nome;
+      cout << "Nome do Hotel a excluir: ";
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      getline(cin, nome);
+      Nome dom;
+      dom.setValor(nome);
+      if (cntrServicoHotel->descadastrar(dom)) {
+        cout << "Hotel excluído com sucesso!" << endl;
+      }
+    } catch (const invalid_argument &e) {
+      cout << "Erro: " << e.what() << endl;
+    }
   }
 }
 
@@ -317,6 +387,35 @@ void CntrApresentacaoPessoal::menuQuartos() {
       cout << "Número: " << q.getNumero()
            << " | Capacidade: " << q.getCapacidade()
            << " | Preço: R$ " << q.getPrecoDiariaReais() << endl;
+    }
+  } else if (opcao == 3) {
+    try {
+      int numero, capacidade, preco;
+      cout << "Número do Quarto a editar: ";
+      cin >> numero;
+      cout << "Nova Capacidade: ";
+      cin >> capacidade;
+      cout << "Novo Preço (centavos): ";
+      cin >> preco;
+      Quarto quarto(numero, capacidade, preco); // PK = numero permanece igual
+      if (cntrServicoQuarto->editar(quarto)) {
+        cout << "Quarto atualizado com sucesso!" << endl;
+      }
+    } catch (const invalid_argument &e) {
+      cout << "Erro: " << e.what() << endl;
+    }
+  } else if (opcao == 4) {
+    try {
+      int numero;
+      cout << "Número do Quarto a excluir: ";
+      cin >> numero;
+      Numero dom;
+      dom.setValor(numero);
+      if (cntrServicoQuarto->descadastrar(dom)) {
+        cout << "Quarto excluído com sucesso!" << endl;
+      }
+    } catch (const invalid_argument &e) {
+      cout << "Erro: " << e.what() << endl;
     }
   }
 }
@@ -372,6 +471,49 @@ void CntrApresentacaoPessoal::menuReservas() {
            << " | Início: " << r.getDataInicio()
            << " | Quarto: " << r.getQuarto().getNumero()
            << " | Hóspede: " << r.getHospede().getEmail() << endl;
+    }
+  } else if (opcao == 3) {
+    try {
+      string codigo, dataInicio, emailHospede;
+      int numQuarto, dias;
+      cout << "Código da Reserva a editar: ";
+      cin >> codigo;
+      cout << "Nova Data de Início (DD-MES-YYYY, ex.: 10-MAI-2025): ";
+      cin >> dataInicio;
+      cout << "Novos Dias: ";
+      cin >> dias;
+      cout << "Email do Hóspede: ";
+      cin >> emailHospede;
+      cout << "Número do Quarto: ";
+      cin >> numQuarto;
+
+      Email email;
+      email.setValor(emailHospede);
+      Hospede hospede = cntrServicoHospede->consultar(email);
+
+      Numero numero;
+      numero.setValor(numQuarto);
+      Quarto quarto = cntrServicoQuarto->consultar(numero);
+
+      Reserva reserva(codigo, dataInicio, dias, hospede, quarto); // PK = codigo permanece
+      if (cntrServicoReserva->editar(reserva)) {
+        cout << "Reserva atualizada com sucesso!" << endl;
+      }
+    } catch (const invalid_argument &e) {
+      cout << "Erro: " << e.what() << endl;
+    }
+  } else if (opcao == 4) {
+    try {
+      string codigo;
+      cout << "Código da Reserva a excluir: ";
+      cin >> codigo;
+      Codigo cod;
+      cod.setValor(codigo);
+      if (cntrServicoReserva->descadastrar(cod)) {
+        cout << "Reserva excluída com sucesso!" << endl;
+      }
+    } catch (const invalid_argument &e) {
+      cout << "Erro: " << e.what() << endl;
     }
   }
 }
