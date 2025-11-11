@@ -207,12 +207,6 @@ void CntrApresentacaoPessoal::menuHospedes() {
   cout << "2. Listar" << endl;
   cout << "3. Editar" << endl;
   cout << "4. Excluir" << endl;
-  cout << "3. Editar" << endl;
-  cout << "4. Excluir" << endl;
-  cout << "3. Editar" << endl;
-  cout << "4. Excluir" << endl;
-  cout << "3. Editar" << endl;
-  cout << "4. Excluir" << endl;
   cout << "Opção: ";
   int opcao;
   cin >> opcao;
@@ -282,6 +276,8 @@ void CntrApresentacaoPessoal::menuHoteis() {
   cout << "\n--- Gerenciar Hotéis ---" << endl;
   cout << "1. Cadastrar" << endl;
   cout << "2. Listar" << endl;
+  cout << "3. Editar" << endl;
+  cout << "4. Excluir" << endl;
   cout << "Opção: ";
   int opcao;
   cin >> opcao;
@@ -355,6 +351,8 @@ void CntrApresentacaoPessoal::menuQuartos() {
   cout << "\n--- Gerenciar Quartos ---" << endl;
   cout << "1. Cadastrar" << endl;
   cout << "2. Listar" << endl;
+  cout << "3. Editar" << endl;
+  cout << "4. Excluir" << endl;
   cout << "Opção: ";
   int opcao;
   cin >> opcao;
@@ -424,6 +422,8 @@ void CntrApresentacaoPessoal::menuReservas() {
   cout << "\n--- Gerenciar Reservas ---" << endl;
   cout << "1. Cadastrar" << endl;
   cout << "2. Listar" << endl;
+  cout << "3. Editar" << endl;
+  cout << "4. Excluir" << endl;
   cout << "Opção: ";
   int opcao;
   cin >> opcao;
