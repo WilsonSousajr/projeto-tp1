@@ -25,14 +25,19 @@ void Pessoa::setEmail(const string &valor) { email.setValor(valor); }
 
 // -------------------- Gerente --------------------
 Gerente::Gerente(const string &nomeValor, const string &emailValor,
-                 const string &matriculaValor)
+                 const string &matriculaValor, const string &senhaValor)
     : Pessoa(nomeValor, emailValor) {
   setMatricula(matriculaValor);
+  setSenha(senhaValor);
 }
 
 string Gerente::getMatricula() const { return matricula.getValor(); }
 
 void Gerente::setMatricula(const string &valor) { matricula.setValor(valor); }
+
+string Gerente::getSenha() const { return senha.getValor(); }
+
+void Gerente::setSenha(const string &valor) { senha.setValor(valor); }
 
 // -------------------- Hospede --------------------
 Hospede::Hospede(const string &nomeValor, const string &emailValor,
@@ -71,9 +76,10 @@ double Quarto::getPrecoDiariaReais() const {
 void Quarto::setPrecoDiaria(int centavos) { precoDiaria.setValor(centavos); }
 
 // -------------------- Hotel --------------------
-Hotel::Hotel(const string &nomeValor, const string &cidadeValor) {
+Hotel::Hotel(const string &nomeValor, const string &cidadeValor, int vagasValor) {
   setNome(nomeValor);
   setCidade(cidadeValor);
+  setVagas(vagasValor);
 }
 
 string Hotel::getNome() const { return nome.getValor(); }
@@ -84,11 +90,26 @@ string Hotel::getCidade() const { return cidade.getValor(); }
 
 void Hotel::setCidade(const string &valor) { cidade.setValor(valor); }
 
+int Hotel::getVagas() const { return vagas.getValor(); }
+
+void Hotel::setVagas(int valor) { vagas.setValor(valor); }
+
 // -------------------- Reserva --------------------
-Reserva::Reserva(const Hospede &h, const Quarto &q, int diasValor)
+Reserva::Reserva(const string &codigoValor, const string &dataInicioValor,
+                 int diasValor, const Hospede &h, const Quarto &q)
     : hospede(h), quarto(q) {
+  setCodigo(codigoValor);
+  setDataInicio(dataInicioValor);
   setDias(diasValor);
 }
+
+string Reserva::getCodigo() const { return codigo.getValor(); }
+
+void Reserva::setCodigo(const string &valor) { codigo.setValor(valor); }
+
+string Reserva::getDataInicio() const { return dataInicio.getValor(); }
+
+void Reserva::setDataInicio(const string &valor) { dataInicio.setValor(valor); }
 
 Hospede Reserva::getHospede() const { return hospede; }
 

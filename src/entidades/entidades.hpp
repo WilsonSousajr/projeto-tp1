@@ -71,11 +71,13 @@ public:
 class Gerente : public Pessoa {
 private:
   Codigo matricula; ///< Matrícula validada (domínio Codigo).
+  Senha senha;      ///< Senha de acesso do gerente.
 public:
   /**
-   * @brief Constrói um Gerente validando nome, email e matrícula.
+   * @brief Constrói um Gerente validando nome, email, matrícula e senha.
    */
-  Gerente(const string &nome, const string &email, const string &matricula);
+  Gerente(const string &nome, const string &email, const string &matricula,
+          const string &senha);
 
   /**
    * @brief Obtém a matrícula (string).
@@ -87,6 +89,17 @@ public:
    * @throw invalid_argument se inválida segundo domínio Codigo.
    */
   void setMatricula(const string &valor);
+
+  /**
+   * @brief Obtém a senha.
+   */
+  string getSenha() const;
+
+  /**
+   * @brief Define/atualiza a senha.
+   * @throw invalid_argument se inválida segundo domínio Senha.
+   */
+  void setSenha(const string &valor);
 };
 
 /**
@@ -187,11 +200,12 @@ class Hotel {
 private:
   Nome nome;   ///< Nome do hotel.
   Nome cidade; ///< Cidade onde está localizado.
+  Numero vagas; ///< Vagas disponíveis no hotel.
 public:
   /**
-   * @brief Constrói um Hotel validando nome e cidade.
+   * @brief Constrói um Hotel validando nome, cidade e vagas.
    */
-  Hotel(const string &nome, const string &cidade);
+  Hotel(const string &nome, const string &cidade, int vagas);
 
   /**
    * @brief Obtém o nome do hotel.
@@ -212,6 +226,16 @@ public:
    * @brief Define/atualiza a cidade.
    */
   void setCidade(const string &valor);
+
+  /**
+   * @brief Obtém o número de vagas.
+   */
+  int getVagas() const;
+
+  /**
+   * @brief Define/atualiza o número de vagas.
+   */
+  void setVagas(int valor);
 };
 
 /**
@@ -222,24 +246,37 @@ public:
  */
 class Reserva {
 private:
+  Codigo codigo;     ///< Código único da reserva.
+  Data dataInicio; ///< Data de início da reserva.
+  Numero dias;     ///< Quantidade de dias.
   Hospede hospede; ///< Hóspede associado.
   Quarto quarto;   ///< Quarto reservado.
-  Numero dias;     ///< Quantidade de dias.
 public:
   /**
    * @brief Constrói uma Reserva validando todos os atributos.
    */
-  Reserva(const Hospede &hospede, const Quarto &quarto, int dias);
+  Reserva(const string &codigo, const string &dataInicio, int dias,
+          const Hospede &hospede, const Quarto &quarto);
 
   /**
-   * @brief Obtém o hóspede.
+   * @brief Obtém o código da reserva.
    */
-  Hospede getHospede() const;
+  string getCodigo() const;
 
   /**
-   * @brief Obtém o quarto.
+   * @brief Define o código da reserva.
    */
-  Quarto getQuarto() const;
+  void setCodigo(const string &valor);
+
+  /**
+   * @brief Obtém a data de início.
+   */
+  string getDataInicio() const;
+
+  /**
+   * @brief Define a data de início.
+   */
+  void setDataInicio(const string &valor);
 
   /**
    * @brief Obtém a quantidade de dias.
@@ -251,6 +288,16 @@ public:
    * @throw invalid_argument se inválido segundo domínio Numero.
    */
   void setDias(int valor);
+
+  /**
+   * @brief Obtém o hóspede.
+   */
+  Hospede getHospede() const;
+
+  /**
+   * @brief Obtém o quarto.
+   */
+  Quarto getQuarto() const;
 
   /**
    * @brief Calcula o total em centavos.
