@@ -1,0 +1,15 @@
+<map id="src/interfaces.hpp" name="src/interfaces.hpp">
+<area shape="rect" id="Node000001" title="Declaração das interfaces para os módulos de serviço." alt="" coords="298,5,423,32"/>
+<area shape="rect" id="Node000002" href="$entidades_8hpp.html" title="Declares entity classes that aggregate validated domain objects." alt="" coords="145,80,307,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="338,35,264,75,262,70,336,30"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="182,229,235,256"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="365,32,367,61,365,101,357,144,337,183,319,202,297,216,251,235,249,230,294,212,316,198,333,180,352,142,360,100,361,62,360,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="397,80,436,107"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="372,31,400,66,396,69,368,34"/>
+<area shape="rect" id="Node000003" href="$dominios_8hpp.html" title="Declaração das classes de domínio responsáveis por validação de dados." alt="" coords="5,155,172,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="203,110,127,149,125,145,201,105"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="227,107,214,214,209,213,222,107"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="245,155,324,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="238,106,267,141,263,144,234,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="111,180,176,219,173,223,108,184"/>
+</map>

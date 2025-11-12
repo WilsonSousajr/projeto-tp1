@@ -1,0 +1,22 @@
+<map id="src/dominios/dominios.hpp" name="src/dominios/dominios.hpp">
+<area shape="rect" id="Node000001" title="Declaração das classes de domínio responsáveis por validação de dados." alt="" coords="107,5,283,32"/>
+<area shape="rect" id="Node000002" href="$dominios_8cpp.html" title="Implementations of domain validation classes." alt="" coords="5,80,182,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,44,113,82,110,77,163,39"/>
+<area shape="rect" id="Node000003" href="$entidades_8hpp.html" title="Declares entity classes that aggregate validated domain objects." alt="" coords="205,80,390,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,39,281,77,278,82,224,44"/>
+<area shape="rect" id="Node000004" href="$entidades_8cpp.html" title="Implementations of entity classes that aggregate validated domains." alt="" coords="116,155,300,181"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="272,119,225,156,222,152,268,115"/>
+<area shape="rect" id="Node000005" href="$interfaces_8hpp.html" title="Declaração das interfaces para os módulos de serviço." alt="" coords="324,155,450,181"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="327,115,373,152,370,156,323,119"/>
+<area shape="rect" id="Node000006" href="$apresentacao_8hpp.html" title="Declaração das classes de controle da camada de apresentação." alt="" coords="161,229,389,256"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="356,192,296,231,293,226,353,188"/>
+<area shape="rect" id="Node000009" href="$servicos_8hpp.html" title="Declaração das classes de serviço e contêineres de dados." alt="" coords="414,229,584,256"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="420,188,481,226,478,231,417,192"/>
+<area shape="rect" id="Node000007" href="$apresentacao_8cpp.html" title="Implementação das classes de controle da camada de apresentação." alt="" coords="101,304,329,331"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="257,270,227,305,223,302,253,266"/>
+<area shape="rect" id="Node000008" href="$main_8cpp.html" title="Ponto de entrada principal da aplicação." alt="" coords="353,304,450,331"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="311,262,381,301,378,306,309,266"/>
+<area shape="poly" id="edge9_Node000009_Node000008" title=" " alt="" coords="471,268,420,306,417,301,468,263"/>
+<area shape="rect" id="Node000010" href="$servicos_8cpp.html" title="Implementação das classes de serviço e contêineres de dados." alt="" coords="474,304,644,331"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="521,266,551,302,546,305,517,270"/>
+</map>

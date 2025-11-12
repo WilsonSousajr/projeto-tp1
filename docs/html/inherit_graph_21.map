@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classIServicoReserva.html" title="Interface para os serviços relacionados à entidade Reserva." alt="" coords="5,5,124,32"/>
+<area shape="rect" id="Node000001" href="$classCntrServicoReserva.html" title="Implementação concreta dos serviços de Reserva." alt="" coords="172,5,311,32"/>
+<area shape="poly" id="edge6_Node000000_Node000001" title=" " alt="" coords="139,16,171,16,171,21,139,21"/>
+</map>

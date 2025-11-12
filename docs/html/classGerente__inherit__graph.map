@@ -1,0 +1,5 @@
+<map id="Gerente" name="Gerente">
+<area shape="rect" id="Node000001" title="Especialização de Pessoa com matrícula (código) válida." alt="" coords="5,229,108,384"/>
+<area shape="rect" id="Node000002" href="$classPessoa.html" title="Representa uma pessoa com nome e email válidos." alt="" coords="14,5,99,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,196,60,230,54,230,54,196"/>
+</map>

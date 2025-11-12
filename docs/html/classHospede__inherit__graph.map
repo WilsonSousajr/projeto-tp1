@@ -1,0 +1,5 @@
+<map id="Hospede" name="Hospede">
+<area shape="rect" id="Node000001" title="Especialização de Pessoa com cartão de crédito válido." alt="" coords="5,229,136,341"/>
+<area shape="rect" id="Node000002" href="$classPessoa.html" title="Representa uma pessoa com nome e email válidos." alt="" coords="28,5,113,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,196,74,230,68,230,68,196"/>
+</map>

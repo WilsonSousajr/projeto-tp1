@@ -1,0 +1,5 @@
+<map id="IServicoHotel" name="IServicoHotel">
+<area shape="rect" id="Node000001" title="Interface para os serviços relacionados à entidade Hotel." alt="" coords="5,5,124,181"/>
+<area shape="rect" id="Node000002" href="$classCntrServicoHotel.html" title="Implementação concreta dos serviços de Hotel." alt="" coords="10,229,120,384"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,196,68,230,62,230,62,196"/>
+</map>

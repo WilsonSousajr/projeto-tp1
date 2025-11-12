@@ -1,0 +1,5 @@
+<map id="IServicoReserva" name="IServicoReserva">
+<area shape="rect" id="Node000001" title="Interface para os serviços relacionados à entidade Reserva." alt="" coords="5,5,142,181"/>
+<area shape="rect" id="Node000002" href="$classCntrServicoReserva.html" title="Implementação concreta dos serviços de Reserva." alt="" coords="10,229,138,384"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,196,76,230,71,230,71,196"/>
+</map>

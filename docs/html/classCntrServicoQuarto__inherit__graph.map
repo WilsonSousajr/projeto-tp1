@@ -1,0 +1,5 @@
+<map id="CntrServicoQuarto" name="CntrServicoQuarto">
+<area shape="rect" id="Node000001" title="Implementação concreta dos serviços de Quarto." alt="" coords="10,229,128,384"/>
+<area shape="rect" id="Node000002" href="$classIServicoQuarto.html" title="Interface para os serviços relacionados à entidade Quarto." alt="" coords="5,5,132,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,196,72,230,66,230,66,196"/>
+</map>

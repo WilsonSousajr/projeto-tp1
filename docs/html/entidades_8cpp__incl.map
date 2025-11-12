@@ -1,0 +1,14 @@
+<map id="src/entidades/entidades.cpp" name="src/entidades/entidades.cpp">
+<area shape="rect" id="Node000001" title="Implementations of entity classes that aggregate validated domains." alt="" coords="167,5,351,32"/>
+<area shape="rect" id="Node000002" href="$entidades_8hpp.html" title="Declares entity classes that aggregate validated domain objects." alt="" coords="157,80,260,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="253,34,228,69,224,66,248,31"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="284,80,336,107"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="270,31,295,66,290,69,266,34"/>
+<area shape="rect" id="Node000003" href="$dominios_8hpp.html" title="Declaração das classes de domínio responsáveis por validação de dados." alt="" coords="5,155,172,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="189,109,124,149,121,144,186,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="122,229,175,256"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="209,107,200,142,186,182,167,217,163,215,181,180,195,140,203,106"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="245,155,324,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="224,105,262,142,259,146,220,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="101,180,131,216,127,219,97,184"/>
+</map>

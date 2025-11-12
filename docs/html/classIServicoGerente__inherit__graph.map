@@ -1,0 +1,5 @@
+<map id="IServicoGerente" name="IServicoGerente">
+<area shape="rect" id="Node000001" title="Interface para os serviços relacionados à entidade Gerente." alt="" coords="5,5,139,139"/>
+<area shape="rect" id="Node000002" href="$classCntrServicoGerente.html" title="Implementação concreta dos serviços de Gerente." alt="" coords="10,187,135,299"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,154,75,187,70,187,70,154"/>
+</map>
