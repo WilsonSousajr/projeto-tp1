@@ -556,6 +556,7 @@ void CntrApresentacaoPessoal::menuReservas() {
     for (const auto &r : lista) {
       cout << "Código: " << r.getCodigo()
            << " | Início: " << r.getDataInicio()
+           << " | Hotel: " << r.getQuarto().getHotel()
            << " | Quarto: " << r.getQuarto().getNumero()
            << " | Hóspede: " << r.getHospede().getEmail() << endl;
     }
