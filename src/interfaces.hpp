@@ -54,6 +54,7 @@ public:
    * @throw invalid_argument se o gerente já existir.
    */
   virtual bool cadastrar(const Gerente &gerente) = 0;
+  virtual Gerente consultar(const Email &email) = 0;
 
   /**
    * @brief Edita os dados de um gerente existente.

@@ -45,7 +45,7 @@ private:
   IServicoGerente *cntrServicoGerente;
 
 public:
-  void executar(const Email &email); // Gerencia a própria conta
+  bool executar(const Email &email); // Gerencia a própria conta; retorna true se excluiu a conta
   void cadastrar();                  // Cadastra um novo gerente
   void setCntrServicoGerente(IServicoGerente *cntr);
 };

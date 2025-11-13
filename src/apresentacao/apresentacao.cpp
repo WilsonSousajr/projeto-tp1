@@ -79,12 +79,43 @@ void CntrApresentacaoControle::executar() {
 
         if (cntrServicoAutenticacao->autenticar(email, senha)) {
           cout << "Login bem-sucedido!" << endl;
-          CntrApresentacaoPessoal cntrPessoal;
-          cntrPessoal.setCntrServicoHospede(this->cntrServicoHospede);
-          cntrPessoal.setCntrServicoHotel(this->cntrServicoHotel);
-          cntrPessoal.setCntrServicoQuarto(this->cntrServicoQuarto);
-          cntrPessoal.setCntrServicoReserva(this->cntrServicoReserva);
-          cntrPessoal.executar();
+          // Loop de sessão autenticada
+          while (true) {
+            cout << "\n--- Sessão ---" << endl;
+            cout << "1. Minha conta (Gerente)" << endl;
+            cout << "2. Serviços (Hóspedes/Hotéis/Quartos/Reservas)" << endl;
+            cout << "3. Logout" << endl;
+            cout << "Escolha uma opção: ";
+            int opSessao;
+            cin >> opSessao;
+            if (!cin) {
+              cin.clear();
+              cin.ignore(numeric_limits<streamsize>::max(), '\n');
+              cout << "Opção inválida." << endl;
+              continue;
+            }
+            if (opSessao == 1) {
+              CntrApresentacaoGerente cntrGerenteAp;
+              cntrGerenteAp.setCntrServicoGerente(cntrServicoGerente);
+              bool deleted = cntrGerenteAp.executar(email);
+              if (deleted) {
+                cout << "Conta excluída. Encerrando sessão." << endl;
+                break;
+              }
+            } else if (opSessao == 2) {
+              CntrApresentacaoPessoal cntrPessoal;
+              cntrPessoal.setCntrServicoHospede(this->cntrServicoHospede);
+              cntrPessoal.setCntrServicoHotel(this->cntrServicoHotel);
+              cntrPessoal.setCntrServicoQuarto(this->cntrServicoQuarto);
+              cntrPessoal.setCntrServicoReserva(this->cntrServicoReserva);
+              cntrPessoal.executar();
+            } else if (opSessao == 3) {
+              cout << "Logout." << endl;
+              break;
+            } else {
+              cout << "Opção inválida." << endl;
+            }
+          }
         } else {
           cout << "Falha na autenticação. Verifique email e senha." << endl;
         }
@@ -137,11 +168,59 @@ void CntrApresentacaoGerente::cadastrar() {
   }
 }
 
-void CntrApresentacaoGerente::executar(const Email &email) {
-  (void)email;
-  // Implementar menu para editar/descadastrar a própria conta
-  cout << "\nFuncionalidades de gerenciamento de conta não implementadas."
-       << endl;
+bool CntrApresentacaoGerente::executar(const Email &email) {
+  while (true) {
+    cout << "\n--- Minha Conta (Gerente) ---" << endl;
+    cout << "1. Ler" << endl;
+    cout << "2. Editar" << endl;
+    cout << "3. Excluir" << endl;
+    cout << "4. Voltar" << endl;
+    cout << "Opção: ";
+    int opcao;
+    cin >> opcao;
+    if (!cin) {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Opção inválida." << endl;
+      continue;
+    }
+    try {
+      if (opcao == 1) {
+        Gerente g = cntrServicoGerente->consultar(email);
+        cout << "Nome: " << g.getNome()
+             << " | Email: " << g.getEmail()
+             << " | Matrícula: " << g.getMatricula() << endl;
+      } else if (opcao == 2) {
+        string nome, matricula, senha;
+        cout << "Novo nome: ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, nome);
+        cout << "Nova matrícula: ";
+        cin >> matricula;
+        cout << "Nova senha: ";
+        cin >> senha;
+        Gerente g(nome, email.getValor(), matricula, senha); // email (PK) imutável
+        if (cntrServicoGerente->editar(g)) {
+          cout << "Conta atualizada com sucesso!" << endl;
+        }
+      } else if (opcao == 3) {
+        cout << "Confirmar exclusão da conta? (y/N): ";
+        char c;
+        cin >> c;
+        if (c == 'y' || c == 'Y') {
+          if (cntrServicoGerente->descadastrar(email)) {
+            return true; // conta excluída -> encerrar sessão
+          }
+        }
+      } else if (opcao == 4) {
+        return false; // voltar ao menu da sessão
+      } else {
+        cout << "Opção inválida." << endl;
+      }
+    } catch (const invalid_argument &e) {
+      cout << "Erro: " << e.what() << endl;
+    }
+  }
 }
 
 // ---------- CntrApresentacaoPessoal ----------

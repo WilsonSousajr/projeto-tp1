@@ -267,6 +267,10 @@ bool CntrServicoGerente::cadastrar(const Gerente &gerente) {
   return true;
 }
 
+Gerente CntrServicoGerente::consultar(const Email &email) {
+  return containerGerente.pesquisar(email.getValor());
+}
+
 bool CntrServicoGerente::editar(const Gerente &gerente) {
   // A chave primária (email) não pode ser editada.
   // O container usa o email como chave, então a atualização é direta.

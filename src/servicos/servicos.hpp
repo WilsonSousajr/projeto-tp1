@@ -115,6 +115,7 @@ public:
 class CntrServicoGerente : public IServicoGerente {
 public:
   bool cadastrar(const Gerente &gerente) override;
+  Gerente consultar(const Email &email) override;
   bool editar(const Gerente &gerente) override;
   bool descadastrar(const Email &email) override;
 };
