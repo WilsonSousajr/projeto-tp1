@@ -95,9 +95,9 @@ public:
 class IServicoHotel {
 public:
   virtual bool cadastrar(const Hotel &hotel) = 0;
-  virtual Hotel consultar(const Nome &nome) = 0;
+  virtual Hotel consultar(const Codigo &codigo) = 0;
   virtual bool editar(const Hotel &hotel) = 0;
-  virtual bool descadastrar(const Nome &nome) = 0;
+  virtual bool descadastrar(const Codigo &codigo) = 0;
   virtual list<Hotel> listar() = 0;
   virtual ~IServicoHotel() {}
 };

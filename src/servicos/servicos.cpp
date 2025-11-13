@@ -148,28 +148,28 @@ list<Hospede> ContainerHospede::listarTodos() {
 
 // ContainerHotel
 void ContainerHotel::inserir(const Hotel &hotel) {
-  if (hoteis.count(hotel.getNome())) {
+  if (hoteis.count(hotel.getCodigo())) {
     throw invalid_argument("Hotel já cadastrado.");
   }
-  hoteis.emplace(hotel.getNome(), hotel);
+  hoteis.emplace(hotel.getCodigo(), hotel);
 }
-void ContainerHotel::remover(const string &nome) {
-  if (!hoteis.count(nome)) {
+void ContainerHotel::remover(const string &codigo) {
+  if (!hoteis.count(codigo)) {
     throw invalid_argument("Hotel não encontrado.");
   }
-  hoteis.erase(nome);
+  hoteis.erase(codigo);
 }
-Hotel ContainerHotel::pesquisar(const string &nome) {
-  if (!hoteis.count(nome)) {
+Hotel ContainerHotel::pesquisar(const string &codigo) {
+  if (!hoteis.count(codigo)) {
     throw invalid_argument("Hotel não encontrado.");
   }
-  return hoteis.at(nome);
+  return hoteis.at(codigo);
 }
 void ContainerHotel::atualizar(const Hotel &hotel) {
-  if (!hoteis.count(hotel.getNome())) {
+  if (!hoteis.count(hotel.getCodigo())) {
     throw invalid_argument("Hotel não encontrado.");
   }
-  hoteis.at(hotel.getNome()) = hotel;
+  hoteis.at(hotel.getCodigo()) = hotel;
 }
 list<Hotel> ContainerHotel::listarTodos() {
   list<Hotel> lista;
@@ -315,24 +315,24 @@ bool CntrServicoHotel::cadastrar(const Hotel &hotel) {
   containerHotel.inserir(hotel);
   return true;
 }
-Hotel CntrServicoHotel::consultar(const Nome &nome) {
-  return containerHotel.pesquisar(nome.getValor());
+Hotel CntrServicoHotel::consultar(const Codigo &codigo) {
+  return containerHotel.pesquisar(codigo.getValor());
 }
 bool CntrServicoHotel::editar(const Hotel &hotel) {
   containerHotel.atualizar(hotel);
   return true;
 }
-bool CntrServicoHotel::descadastrar(const Nome &nome) {
+bool CntrServicoHotel::descadastrar(const Codigo &codigo) {
   // Bloqueia exclusão se houver quartos associados a este hotel.
   {
     list<Quarto> qs = containerQuarto.listarTodos();
     for (const auto &q : qs) {
-      if (q.getHotel() == nome.getValor()) {
+      if (q.getHotelCodigo() == codigo.getValor()) {
         throw invalid_argument("Hotel possui quartos e não pode ser excluído.");
       }
     }
   }
-  containerHotel.remover(nome.getValor());
+  containerHotel.remover(codigo.getValor());
   return true;
 }
 list<Hotel> CntrServicoHotel::listar() { return containerHotel.listarTodos(); }
@@ -341,7 +341,7 @@ list<Hotel> CntrServicoHotel::listar() { return containerHotel.listarTodos(); }
 bool CntrServicoQuarto::cadastrar(const Quarto &quarto) {
   // Verifica se o hotel referenciado existe.
   try {
-    (void)containerHotel.pesquisar(quarto.getHotel());
+    (void)containerHotel.pesquisar(quarto.getHotelCodigo());
   } catch (const invalid_argument &) {
     throw invalid_argument("Hotel do quarto não encontrado.");
   }
@@ -355,11 +355,11 @@ bool CntrServicoQuarto::editar(const Quarto &quarto) {
   {
     // Hotel do quarto é imutável; compara com o atual.
     Quarto atual = containerQuarto.pesquisar(quarto.getNumero());
-    if (atual.getHotel() != quarto.getHotel()) {
+    if (atual.getHotelCodigo() != quarto.getHotelCodigo()) {
       throw invalid_argument("Hotel do quarto não pode ser alterado.");
     }
     // (Opcional) garantir que o hotel ainda existe.
-    (void)containerHotel.pesquisar(quarto.getHotel());
+    (void)containerHotel.pesquisar(quarto.getHotelCodigo());
   }
   containerQuarto.atualizar(quarto);
   return true;

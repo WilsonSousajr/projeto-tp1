@@ -72,12 +72,13 @@ class Gerente : public Pessoa {
 private:
   Codigo matricula; ///< Matrícula validada (domínio Codigo).
   Senha senha;      ///< Senha de acesso do gerente.
+  Ramal ramal;
 public:
   /**
    * @brief Constrói um Gerente validando nome, email, matrícula e senha.
    */
   Gerente(const string &nome, const string &email, const string &matricula,
-          const string &senha);
+          const string &senha, int ramal);
 
   /**
    * @brief Obtém a matrícula (string).
@@ -100,6 +101,8 @@ public:
    * @throw invalid_argument se inválida segundo domínio Senha.
    */
   void setSenha(const string &valor);
+  int getRamal() const;
+  void setRamal(int valor);
 };
 
 /**
@@ -111,11 +114,12 @@ public:
 class Hospede : public Pessoa {
 private:
   Cartao cartaoCredito; ///< Cartão de crédito validado.
+  Endereco endereco; ///< Endereço do hóspede.
 public:
   /**
    * @brief Constrói um Hóspede validando nome, email e cartão.
    */
-  Hospede(const string &nome, const string &email, const string &cartaoCredito);
+  Hospede(const string &nome, const string &email, const string &endereco, const string &cartaoCredito);
 
   /**
    * @brief Obtém o número do cartão de crédito.
@@ -127,6 +131,8 @@ public:
    * @throw invalid_argument se inválido segundo domínio Cartao.
    */
   void setCartaoCredito(const string &valor);
+  string getEndereco() const;
+  void setEndereco(const string &valor);
 };
 
 /**
@@ -140,7 +146,8 @@ class Quarto {
 private:
   Numero numero;         ///< Número identificador do quarto.
   Capacidade capacidade; ///< Capacidade de hóspedes.
-  Nome hotel;
+  Codigo hotelCodigo;
+  Ramal ramal;
   Dinheiro precoDiaria;  ///< Preço da diária em centavos (domínio Dinheiro).
 public:
   /**
@@ -149,13 +156,15 @@ public:
    * @param capacidade Valor 1..4.
    * @param precoCentavos Valor em centavos (1 a 100000000).
    */
-  Quarto(int numero, const string &hotelNome, int capacidade, int precoCentavos);
+  Quarto(int numero, const string &hotelCodigo, int capacidade, int precoCentavos, int ramal);
 
   /**
    * @brief Obtém o número do quarto.
    */
   int getNumero() const;
-  string getHotel() const;
+  string getHotelCodigo() const;
+  int getRamal() const;
+  void setRamal(int valor);
 
   /**
    * @brief Define o número do quarto.
@@ -200,14 +209,17 @@ public:
  */
 class Hotel {
 private:
-  Nome nome;   ///< Nome do hotel.
-  Nome cidade; ///< Cidade onde está localizado.
-  Numero vagas; ///< Vagas disponíveis no hotel.
+  Codigo codigo;   // PK
+  Nome nome;
+  Nome cidade;
+  Numero vagas;
+  Endereco endereco;
+  Telefone telefone;
 public:
   /**
    * @brief Constrói um Hotel validando nome, cidade e vagas.
    */
-  Hotel(const string &nome, const string &cidade, int vagas);
+  Hotel(const string &codigo, const string &nome, const string &cidade, int vagas, const string &endereco, const string &telefone);
 
   /**
    * @brief Obtém o nome do hotel.
@@ -238,6 +250,12 @@ public:
    * @brief Define/atualiza o número de vagas.
    */
   void setVagas(int valor);
+  string getCodigo() const;
+  void setCodigo(const string &valor);
+  string getEndereco() const;
+  void setEndereco(const string &valor);
+  string getTelefone() const;
+  void setTelefone(const string &valor);
 };
 
 /**

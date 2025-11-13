@@ -59,8 +59,8 @@ private:
 
 public:
   void inserir(const Hotel &hotel);
-  void remover(const string &nome);
-  Hotel pesquisar(const string &nome);
+  void remover(const string &codigo);
+  Hotel pesquisar(const string &codigo);
   void atualizar(const Hotel &hotel);
   list<Hotel> listarTodos();
 };
@@ -140,9 +140,9 @@ public:
 class CntrServicoHotel : public IServicoHotel {
 public:
   bool cadastrar(const Hotel &hotel) override;
-  Hotel consultar(const Nome &nome) override;
+  Hotel consultar(const Codigo &codigo) override;
   bool editar(const Hotel &hotel) override;
-  bool descadastrar(const Nome &nome) override;
+  bool descadastrar(const Codigo &codigo) override;
   list<Hotel> listar() override;
 };
 

@@ -25,10 +25,11 @@ void Pessoa::setEmail(const string &valor) { email.setValor(valor); }
 
 // -------------------- Gerente --------------------
 Gerente::Gerente(const string &nomeValor, const string &emailValor,
-                 const string &matriculaValor, const string &senhaValor)
+                 const string &matriculaValor, const string &senhaValor, int ramalValor)
     : Pessoa(nomeValor, emailValor) {
   setMatricula(matriculaValor);
   setSenha(senhaValor);
+  setRamal(ramalValor);
 }
 
 string Gerente::getMatricula() const { return matricula.getValor(); }
@@ -39,10 +40,15 @@ string Gerente::getSenha() const { return senha.getValor(); }
 
 void Gerente::setSenha(const string &valor) { senha.setValor(valor); }
 
+int Gerente::getRamal() const { return ramal.getValor(); }
+
+void Gerente::setRamal(int valor) { ramal.setValor(valor); }
+
 // -------------------- Hospede --------------------
 Hospede::Hospede(const string &nomeValor, const string &emailValor,
-                 const string &cartaoValor)
+                 const string &enderecoValor, const string &cartaoValor)
     : Pessoa(nomeValor, emailValor) {
+  setEndereco(enderecoValor);
   setCartaoCredito(cartaoValor);
 }
 
@@ -52,16 +58,21 @@ void Hospede::setCartaoCredito(const string &valor) {
   cartaoCredito.setValor(valor);
 }
 
+string Hospede::getEndereco() const { return endereco.getValor(); }
+
+void Hospede::setEndereco(const string &valor) { endereco.setValor(valor); }
+
 // -------------------- Quarto --------------------
-Quarto::Quarto(int numeroValor, const string &hotelNome, int capacidadeValor, int precoCentavos) {
+Quarto::Quarto(int numeroValor, const string &hotelCodigoValor, int capacidadeValor, int precoCentavos, int ramalValor) {
   setNumero(numeroValor);
-  hotel.setValor(hotelNome);
+  hotelCodigo.setValor(hotelCodigoValor);
   setCapacidade(capacidadeValor);
   setPrecoDiaria(precoCentavos);
+  setRamal(ramalValor);
 }
 
 int Quarto::getNumero() const { return numero.getValor(); }
-string Quarto::getHotel() const { return hotel.getValor(); }
+string Quarto::getHotelCodigo() const { return hotelCodigo.getValor(); }
 
 void Quarto::setNumero(int valor) { numero.setValor(valor); }
 
@@ -77,11 +88,18 @@ double Quarto::getPrecoDiariaReais() const {
 
 void Quarto::setPrecoDiaria(int centavos) { precoDiaria.setValor(centavos); }
 
+int Quarto::getRamal() const { return ramal.getValor(); }
+
+void Quarto::setRamal(int valor) { ramal.setValor(valor); }
+
 // -------------------- Hotel --------------------
-Hotel::Hotel(const string &nomeValor, const string &cidadeValor, int vagasValor) {
+Hotel::Hotel(const string &codigoValor, const string &nomeValor, const string &cidadeValor, int vagasValor, const string &enderecoValor, const string &telefoneValor) {
+  setCodigo(codigoValor);
   setNome(nomeValor);
   setCidade(cidadeValor);
   setVagas(vagasValor);
+  setEndereco(enderecoValor);
+  setTelefone(telefoneValor);
 }
 
 string Hotel::getNome() const { return nome.getValor(); }
@@ -95,6 +113,18 @@ void Hotel::setCidade(const string &valor) { cidade.setValor(valor); }
 int Hotel::getVagas() const { return vagas.getValor(); }
 
 void Hotel::setVagas(int valor) { vagas.setValor(valor); }
+
+string Hotel::getCodigo() const { return codigo.getValor(); }
+
+void Hotel::setCodigo(const string &valor) { codigo.setValor(valor); }
+
+string Hotel::getEndereco() const { return endereco.getValor(); }
+
+void Hotel::setEndereco(const string &valor) { endereco.setValor(valor); }
+
+string Hotel::getTelefone() const { return telefone.getValor(); }
+
+void Hotel::setTelefone(const string &valor) { telefone.setValor(valor); }
 
 // -------------------- Reserva --------------------
 Reserva::Reserva(const string &codigoValor, const string &dataInicioValor,
