@@ -140,6 +140,7 @@ class Quarto {
 private:
   Numero numero;         ///< Número identificador do quarto.
   Capacidade capacidade; ///< Capacidade de hóspedes.
+  Nome hotel;
   Dinheiro precoDiaria;  ///< Preço da diária em centavos (domínio Dinheiro).
 public:
   /**
@@ -148,12 +149,13 @@ public:
    * @param capacidade Valor 1..4.
    * @param precoCentavos Valor em centavos (1 a 100000000).
    */
-  Quarto(int numero, int capacidade, int precoCentavos);
+  Quarto(int numero, const string &hotelNome, int capacidade, int precoCentavos);
 
   /**
    * @brief Obtém o número do quarto.
    */
   int getNumero() const;
+  string getHotel() const;
 
   /**
    * @brief Define o número do quarto.

@@ -444,13 +444,17 @@ void CntrApresentacaoPessoal::menuQuartos() {
   if (opcao == 1) {
     try {
       int numero, capacidade, preco;
+      string hotelNome;
       cout << "Número do Quarto: ";
       cin >> numero;
+      cout << "Hotel do Quarto (nome exato de um hotel existente): ";
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      getline(cin, hotelNome);
       cout << "Capacidade: ";
       cin >> capacidade;
       cout << "Preço (centavos): ";
       cin >> preco;
-      Quarto quarto(numero, capacidade, preco);
+      Quarto quarto(numero, hotelNome, capacidade, preco);
       if (cntrServicoQuarto->cadastrar(quarto)) {
         cout << "Quarto cadastrado com sucesso!" << endl;
       }
@@ -462,6 +466,7 @@ void CntrApresentacaoPessoal::menuQuartos() {
     cout << "\n--- Lista de Quartos ---" << endl;
     for (const auto &q : lista) {
       cout << "Número: " << q.getNumero()
+           << " | Hotel: " << q.getHotel()
            << " | Capacidade: " << q.getCapacidade()
            << " | Preço: R$ " << q.getPrecoDiariaReais() << endl;
     }
@@ -470,12 +475,15 @@ void CntrApresentacaoPessoal::menuQuartos() {
       int numero, capacidade, preco;
       cout << "Número do Quarto a editar: ";
       cin >> numero;
+      Numero numDom;
+      numDom.setValor(numero);
+      Quarto atual = cntrServicoQuarto->consultar(numDom);
       cout << "Nova Capacidade: ";
       cin >> capacidade;
       cout << "Novo Preço (centavos): ";
       cin >> preco;
-      Quarto quarto(numero, capacidade, preco); // PK = numero permanece igual
-      if (cntrServicoQuarto->editar(quarto)) {
+      Quarto quartoAtualizado(numero, atual.getHotel(), capacidade, preco); // hotel imutável
+      if (cntrServicoQuarto->editar(quartoAtualizado)) {
         cout << "Quarto atualizado com sucesso!" << endl;
       }
     } catch (const invalid_argument &e) {

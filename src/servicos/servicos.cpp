@@ -323,10 +323,15 @@ bool CntrServicoHotel::editar(const Hotel &hotel) {
   return true;
 }
 bool CntrServicoHotel::descadastrar(const Nome &nome) {
-  // Regra de negócio: não permitir exclusão se houver quartos associados.
-  // Esta verificação é simplificada. Uma implementação real associaria
-  // quartos a hotéis. Como não há essa associação direta, a regra não pode
-  // ser implementada aqui.
+  // Bloqueia exclusão se houver quartos associados a este hotel.
+  {
+    list<Quarto> qs = containerQuarto.listarTodos();
+    for (const auto &q : qs) {
+      if (q.getHotel() == nome.getValor()) {
+        throw invalid_argument("Hotel possui quartos e não pode ser excluído.");
+      }
+    }
+  }
   containerHotel.remover(nome.getValor());
   return true;
 }
@@ -334,6 +339,12 @@ list<Hotel> CntrServicoHotel::listar() { return containerHotel.listarTodos(); }
 
 // CntrServicoQuarto
 bool CntrServicoQuarto::cadastrar(const Quarto &quarto) {
+  // Verifica se o hotel referenciado existe.
+  try {
+    (void)containerHotel.pesquisar(quarto.getHotel());
+  } catch (const invalid_argument &) {
+    throw invalid_argument("Hotel do quarto não encontrado.");
+  }
   containerQuarto.inserir(quarto);
   return true;
 }
@@ -341,6 +352,15 @@ Quarto CntrServicoQuarto::consultar(const Numero &numero) {
   return containerQuarto.pesquisar(numero.getValor());
 }
 bool CntrServicoQuarto::editar(const Quarto &quarto) {
+  {
+    // Hotel do quarto é imutável; compara com o atual.
+    Quarto atual = containerQuarto.pesquisar(quarto.getNumero());
+    if (atual.getHotel() != quarto.getHotel()) {
+      throw invalid_argument("Hotel do quarto não pode ser alterado.");
+    }
+    // (Opcional) garantir que o hotel ainda existe.
+    (void)containerHotel.pesquisar(quarto.getHotel());
+  }
   containerQuarto.atualizar(quarto);
   return true;
 }

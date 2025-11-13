@@ -53,13 +53,15 @@ void Hospede::setCartaoCredito(const string &valor) {
 }
 
 // -------------------- Quarto --------------------
-Quarto::Quarto(int numeroValor, int capacidadeValor, int precoCentavos) {
+Quarto::Quarto(int numeroValor, const string &hotelNome, int capacidadeValor, int precoCentavos) {
   setNumero(numeroValor);
+  hotel.setValor(hotelNome);
   setCapacidade(capacidadeValor);
   setPrecoDiaria(precoCentavos);
 }
 
 int Quarto::getNumero() const { return numero.getValor(); }
+string Quarto::getHotel() const { return hotel.getValor(); }
 
 void Quarto::setNumero(int valor) { numero.setValor(valor); }
 
